@@ -20,10 +20,19 @@ def main():
         "docs/workflows/performance-testing.md",
         "docs/workflows/orchestrated-qe-task.md",
         "CHANGELOG.md",
+        "docs/integrations/mcp-architecture.md",
+        "docs/integrations/atlassian-jira-confluence.md",
+        "docs/integrations/github.md",
+        "docs/integrations/jenkins.md",
+        "docs/integrations/client-setup.md",
+        "docs/integrations/qe-workflows.md",
+        "docs/integrations/references.md",
+        "integrations/mcp/README.md",
+        "integrations/mcp/README-SECURITY.md",
     ]
     missing = [p for p in required if not (ROOT / p).is_file()]
     readme = README.read_text(encoding="utf-8")
-    for heading in ["Proposed architecture", "Quick start", "How to use it", "Skills catalogue", "Agent catalogue", "Safety and data handling"]:
+    for heading in ["Proposed architecture", "Quick start", "How to use it", "Skills catalogue", "Agent catalogue", "Safety and data handling", "Milestone 4 — MCP integrations"]:
         if heading not in readme:
             missing.append(f"README missing section: {heading}")
     if missing:

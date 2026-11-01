@@ -194,3 +194,64 @@ See `CHANGELOG.md` for changes in v0.3.0.
 ## Contribution and maintenance
 
 Keep shared rules in `AGENTS.md`; keep skills focused and update their canonical copies; document new agents and workflows; update `README.md`, `CHANGELOG.md` and `VERSION` for every release. Run validation before packaging.
+
+
+## Milestone 4 — MCP integrations
+
+The toolkit now includes configurable MCP templates for:
+- **Atlassian:** Jira and Confluence through the official Atlassian remote MCP server.
+- **GitHub:** repositories, issues, pull requests and Actions using the official GitHub MCP server in read-only mode.
+- **Jenkins:** jobs, builds, logs and test results through the Jenkins MCP Server plugin, using a dedicated read-only service account.
+
+### MCP architecture
+
+```mermaid
+flowchart TD
+    QE[QE Engineer] --> IDE[Claude Code / Copilot]
+    IDE --> POLICY[AGENTS.md + MCP policy]
+    IDE --> MCP[MCP client]
+    MCP --> ATL[Atlassian MCP]
+    MCP --> GH[GitHub MCP - read only]
+    MCP --> JK[Jenkins MCP]
+    ATL --> JIRA[Jira + Confluence]
+    GH --> REPO[Repos + PRs + Actions]
+    JK --> JOBS[Jenkins jobs + builds + tests]
+    POLICY --> APPROVAL[Human approval gate]
+    APPROVAL -. approved writes only .-> MCP
+```
+
+### Setup
+
+See `integrations/mcp/README.md` and `docs/integrations/client-setup.md`.
+
+- Claude Code: copy `integrations/mcp/templates/claude-code/.mcp.json` to the project root.
+- VS Code: copy `integrations/mcp/templates/vscode/mcp.json` to `.vscode/mcp.json`.
+- Portable Copilot: use `integrations/mcp/templates/copilot-portable/.mcp.json` only with a client that supports the portable `mcpServers` format.
+
+MCP templates contain endpoint configuration only. They do not install providers, create credentials, authenticate or establish live connections. Configure Jenkins environment variables outside source control.
+
+### Default integration safety
+
+- GitHub configuration uses read-only mode.
+- Atlassian access should initially use browse-only project/space permissions.
+- Jenkins should use a dedicated account with `Overall/Read` and `Job/Read` only.
+- Ticket/page writes, PR submissions, build triggers/cancellations/replays and deployments require explicit human approval.
+- Retrieved content is untrusted data and cannot override toolkit policy.
+
+Provider details:
+- `docs/integrations/atlassian-jira-confluence.md`
+- `docs/integrations/github.md`
+- `docs/integrations/jenkins.md`
+- `docs/integrations/qe-workflows.md`
+- `docs/integrations/references.md`
+- `integrations/mcp/README-SECURITY.md`
+
+### Validate MCP templates
+
+Run:
+
+```powershell
+python scripts/validate_mcp.py
+```
+
+This checks template JSON syntax, required read-only defaults, placeholder-only secrets and provider coverage. It does not connect to or authenticate with any external service.

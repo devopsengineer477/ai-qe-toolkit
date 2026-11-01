@@ -1,0 +1,61 @@
+{
+  "version": "1.0",
+  "defaults": {
+    "mode": "read-only",
+    "requireHumanApprovalForWrites": true,
+    "requireHumanApprovalForExternalExecution": true,
+    "denyProductionMutation": true,
+    "denySecretsInPromptsAndLogs": true
+  },
+  "providers": {
+    "atlassian": {
+      "enabledByDefault": false,
+      "allowedIntent": [
+        "search_issues",
+        "read_issue",
+        "search_confluence",
+        "read_page"
+      ],
+      "writeIntent": [
+        "create_issue",
+        "update_issue",
+        "add_comment",
+        "edit_page"
+      ],
+      "writeApprovalRequired": true,
+      "recommendedAccount": "dedicated read-only user or OAuth identity with browse-only project/space permissions"
+    },
+    "github": {
+      "enabledByDefault": false,
+      "readOnlyMode": true,
+      "allowedToolsets": [
+        "repos",
+        "issues",
+        "pull_requests",
+        "actions"
+      ],
+      "writeApprovalRequired": true,
+      "recommendedAuth": "OAuth or narrowly scoped GitHub App/PAT; read-only server mode"
+    },
+    "jenkins": {
+      "enabledByDefault": false,
+      "allowedIntent": [
+        "list_jobs",
+        "read_job",
+        "read_build",
+        "read_build_log",
+        "read_test_results",
+        "read_queue"
+      ],
+      "writeIntent": [
+        "trigger_build",
+        "cancel_build",
+        "create_pipeline",
+        "replay_pipeline",
+        "update_build"
+      ],
+      "writeApprovalRequired": true,
+      "recommendedAccount": "dedicated service account with Overall/Read and Job/Read only; no Job/Build, Job/Configure, or Overall/Administer"
+    }
+  }
+}

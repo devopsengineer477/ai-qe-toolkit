@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "1.0",
+  "providers": [
+    {
+      "id": "atlassian",
+      "systems": [
+        "jira",
+        "confluence"
+      ],
+      "transport": "streamable-http",
+      "auth": "oauth2.1",
+      "defaultAccess": "read-only-by-identity",
+      "writesRequireApproval": true
+    },
+    {
+      "id": "github",
+      "systems": [
+        "repositories",
+        "issues",
+        "pull-requests",
+        "actions"
+      ],
+      "transport": "streamable-http",
+      "auth": "provider-oauth-or-approved-token",
+      "defaultAccess": "read-only-server-mode",
+      "writesRequireApproval": true
+    },
+    {
+      "id": "jenkins",
+      "systems": [
+        "jobs",
+        "builds",
+        "logs",
+        "test-results"
+      ],
+      "transport": "streamable-http",
+      "auth": "jenkins-api-token-basic-auth",
+      "defaultAccess": "read-only-service-account",
+      "writesRequireApproval": true
+    }
+  ]
+}

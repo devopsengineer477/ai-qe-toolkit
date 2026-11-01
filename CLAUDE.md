@@ -29,3 +29,6 @@ Claude Code project skills are stored in `.claude/skills/`.
 
 - For cross-functional QE work, start with the `qe-orchestrator` agent and `qe-orchestration` skill.
 - Apply `execution-safety` before running commands that access external systems, mutate data, deploy, or generate load.
+
+- MCP configuration templates are under `integrations/mcp/templates/`; never copy credentials into tracked files.
+- Before using MCP, inspect the provider's permissions and follow `integrations/mcp/README-SECURITY.md`.
