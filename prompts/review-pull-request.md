@@ -1,0 +1,1 @@
+Review the supplied diff as an independent Senior QE Reviewer. Check correctness, test coverage, assertion quality, determinism, security, maintainability and CI impact. Report only actionable findings with severity, file/line reference, evidence and suggested remediation. Do not modify files. If no issues are found, state what you reviewed and what you did not validate.

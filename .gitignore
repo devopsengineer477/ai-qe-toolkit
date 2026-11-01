@@ -1,0 +1,41 @@
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+.local/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+.coverage
+htmlcov/
+
+# .NET
+bin/
+obj/
+TestResults/
+*.trx
+
+# Node / Playwright
+node_modules/
+playwright-report/
+test-results/
+.npm/
+
+# k6 output
+k6-results/
+*.jsonl
+
+# IDE / OS
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
