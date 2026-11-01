@@ -57,3 +57,12 @@ A change is complete only when:
 
 ## Communication
 Be direct and evidence-based. Do not invent requirements, test results, APIs, file paths, environment variables or tool capabilities. If uncertain, state the uncertainty and propose a safe way to verify it.
+
+
+## Orchestration and approval gates
+- For end-to-end or multi-specialist tasks, follow `.claude/skills/qe-orchestration/SKILL.md` or `.github/skills/qe-orchestration/SKILL.md`, depending on the active tool.
+- Classify execution actions using the `execution-safety` skill. Read-only repository inspection and local validation are distinct from external or state-changing execution.
+- Explicitly request human approval before API mutations, shared-environment execution, DAST, deployments, data deletion/migration, or load/stress testing.
+- Approval must identify the exact target, action, scope and stop conditions. Re-confirm if any of them changes.
+- Preserve a traceability chain: requirement -> risk -> test case -> automation -> result/evidence -> defect or disposition.
+- Keep orchestrator coordination separate from specialist implementation; the orchestrator owns integration and reporting, not blanket permission to execute.

@@ -26,3 +26,6 @@ Available skills:
 - `api-testing`
 
 Claude Code project skills are stored in `.claude/skills/`.
+
+- For cross-functional QE work, start with the `qe-orchestrator` agent and `qe-orchestration` skill.
+- Apply `execution-safety` before running commands that access external systems, mutate data, deploy, or generate load.

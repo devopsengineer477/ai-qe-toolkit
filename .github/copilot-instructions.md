@@ -16,3 +16,7 @@ This is a reusable Quality Engineering toolkit, not a single application or prec
 
 ## Validation
 Run relevant repository checks where feasible. In the final response, list commands actually executed and distinguish passed, failed, skipped and not run. Never claim success without execution evidence.
+
+
+## Orchestration
+For multi-step QE tasks, use the QE Orchestrator agent and `qe-orchestration` skill. Use `execution-safety` to classify commands. Ask for explicit human approval before external, shared-environment, state-changing, destructive, deployment or load-intensive actions. Never report unexecuted checks as passed.

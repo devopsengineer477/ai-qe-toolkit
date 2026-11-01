@@ -8,4 +8,7 @@ python scripts/validate_toolkit.py
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 python scripts/validate_skills.py
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-Write-Host "Milestone 1 + 2 validation completed successfully." -ForegroundColor Green
+Write-Host "Milestone 1 + 2 + 3 validation completed successfully." -ForegroundColor Green
+
+python scripts/validate_docs.py
+if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }

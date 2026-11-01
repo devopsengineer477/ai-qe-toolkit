@@ -1,8 +1,53 @@
 # AI QE Toolkit
 
-A reusable, Windows-friendly foundation for AI-assisted Quality Engineering with Claude Code and VS Code + GitHub Copilot.
+A reusable, Windows-friendly foundation for AI-assisted Quality Engineering with **Claude Code** and **VS Code + GitHub Copilot**. It combines shared engineering instructions, reusable skills, specialist agents, standards, templates and safe workflows.
 
-**Milestone 1 scope:** shared QE instructions, three core skills, specialist agents, technology standards, templates, and local validation scripts.
+**Current release: v0.3.0 — Milestone 3: Agent Orchestration & Human-in-the-Loop.**
+
+## What this toolkit does
+
+- Turns requirements into risk-based test strategies, test cases and traceability.
+- Guides generation and review of pytest, Playwright, Postman/Newman, .NET and k6 assets.
+- Coordinates specialist AI agents for multi-step QE work.
+- Adds human approval gates before external, shared-environment, destructive, deployment or load-intensive actions.
+- Standardizes reporting so generated, reviewed, executed, passed, failed and not-run checks are not confused.
+
+It is a **QE knowledge and workflow layer**, not a preconfigured test runner or live Jira/Jenkins integration.
+
+## Proposed architecture
+
+```mermaid
+flowchart TD
+    User[QE Engineer / Lead] --> IDE[Claude Code or VS Code + Copilot]
+    IDE --> Policy[AGENTS.md + tool-specific instructions]
+    IDE --> Orchestrator[QE Orchestrator]
+    Orchestrator --> Skills[Reusable skills]
+    Orchestrator --> Agents[Specialist agents]
+    Skills --> Standards[QE and technology standards]
+    Agents --> Artifacts[Test strategy / cases / scripts / reviews]
+    Artifacts --> Gate[Human approval + execution safety]
+    Gate --> Runner[Authorized local or test environment]
+    Runner --> Evidence[Results, logs and evidence]
+    Evidence --> Report[Traceability and QE report]
+```
+
+### Repository structure
+
+| Path | Purpose |
+|---|---|
+| `AGENTS.md` | Shared engineering, quality and safety rules |
+| `CLAUDE.md` | Claude Code project guidance |
+| `.github/copilot-instructions.md` | GitHub Copilot project guidance |
+| `skills/` | Canonical reusable skill definitions |
+| `.claude/skills/` | Claude Code skill copies |
+| `.github/skills/` | Copilot skill copies |
+| `.claude/agents/` | Claude Code specialist agents |
+| `.github/agents/` | Copilot custom agents |
+| `standards/` | Technology and QE standards |
+| `templates/` | Reusable test and defect templates |
+| `workflows/` | Task plans and approval templates |
+| `docs/` | Architecture, setup and workflow guides |
+| `scripts/` | Validation and skill synchronization |
 
 ## Supported technology areas
 
@@ -13,74 +58,139 @@ A reusable, Windows-friendly foundation for AI-assisted Quality Engineering with
 - Jenkins / GitHub Actions
 - k6 performance testing
 
-## Repository principles
+## Quick start — Windows
 
-1. Keep shared engineering policy in `AGENTS.md`.
-2. Keep Claude-specific workflow guidance in `CLAUDE.md`.
-3. Keep Copilot-specific guidance in `.github/copilot-instructions.md`.
-4. Skills are task playbooks, not substitutes for project instructions.
-5. Agents are focused roles; restrict tools and permissions where possible.
-6. Never claim a test passed unless it was actually executed and its result observed.
-7. Use only explicitly authorized environments for active testing.
+### Prerequisites
+- Windows 10/11 or managed Windows workstation
+- Git
+- Python 3.10+ on PATH
+- VS Code
+- Claude Code CLI and/or GitHub Copilot, subject to your organization's licensing and policy
 
-## Quick start (Windows PowerShell)
+### Install and validate
 
 ```powershell
-# 1. Extract this archive, then open the extracted folder in VS Code.
+# Extract the ZIP and open PowerShell in the repository folder
 cd C:\Projects\ai-qe-toolkit
 
-# 2. Initialize Git.
+# Initialize Git if this is a new repository
 git init
 git add .
-git commit -m "chore: initialize AI QE Toolkit"
+git commit -m "chore: initialize AI QE Toolkit v0.3.0"
 
-# 3. Validate the repository content.
+# Validate required files, agents and skills
 .\scripts\Validate-Toolkit.ps1
-
-# 4. Open Claude Code from the repository root.
-claude
-
-# 5. In Claude Code, inspect available skills and run a safe test-design task.
 ```
 
-## Skill locations
+Open the folder in VS Code. Start Claude Code from the repository root using `claude`, or open Copilot Chat in VS Code Agent mode.
 
-The same three skills are included in both native locations so each tool can discover them without relying on custom path settings:
+For detailed instructions, see `docs/getting-started/windows-setup.md`.
 
-- Claude Code: `.claude/skills/<skill-name>/SKILL.md`
-- VS Code / GitHub Copilot: `.github/skills/<skill-name>/SKILL.md`
+## How to use it
 
-`skills/` contains the canonical copies. Run `python scripts/validate_skills.py` to check that native copies match the canonical source.
+### 1. Start with project context
+Ask your AI tool to read `AGENTS.md` and its tool-specific instructions. In the application repository, inspect that repository's conventions and tests before generating code.
 
-## Suggested first prompts
-
-### Claude Code
+### 2. Use the QE Orchestrator for multi-step work
+Choose the **QE Orchestrator** agent or ask:
 
 ```text
-Read AGENTS.md and CLAUDE.md. Inspect this repository without changing files.
-Explain the toolkit structure, list the three available skills and agents,
-and identify any configuration or validation gaps.
+Use the QE Orchestrator. Read the project instructions and inspect the existing
+test architecture. Analyze this requirement, propose a risk-based plan and
+requirement-to-test traceability matrix. Do not edit files or call external
+systems yet. Identify which specialist skills and agents are appropriate.
 ```
 
-### Copilot Chat (Agent mode)
+### 3. Delegate specialist work
+Use the Test Architect for strategy and coverage, API Test Designer for API scenarios, Automation Developer for framework-specific scripts, and CI Pipeline Reviewer for pipeline analysis. The orchestrator integrates the outputs and reports gaps.
 
-```text
-Read AGENTS.md and .github/copilot-instructions.md.
-Use the test-design skill to analyze examples/sample-api-requirement.md.
-Do not modify files. Produce test cases and a traceability matrix.
+### 4. Generate and review artifacts
+Ask the relevant skill to create test cases, scripts, fixtures or review findings. Inspect all diffs. Keep generated code aligned with project standards and existing patterns.
+
+### 5. Approve execution separately
+Classify actions using `execution-safety`:
+- **A:** read-only local inspection and repository validation.
+- **B:** safe local tests or simulations.
+- **C:** external API calls, shared test environments, DAST, deployment or data mutation.
+- **D:** production, destructive, broad scanning or high-load actions.
+
+For C and D, provide explicit approval for the exact target, command, scope, rate/duration and stop conditions. If approval is absent, the correct status is **BLOCKED — approval required**. Approval for one target/action does not authorize another.
+
+### 6. Report accurately
+Require a final summary with changed files, requirement traceability, exact commands, observed results, evidence, risks and follow-ups. Mark checks that were not run as **not run**; never claim they passed.
+
+## Skills catalogue
+
+| Skill | Purpose |
+|---|---|
+| `qe-standards` | Shared quality engineering principles |
+| `test-design` | Risk-based test design and coverage |
+| `api-testing` | API test strategy and scenarios |
+| `pytest-automation` | Python/pytest automation |
+| `playwright-automation` | Browser/UI automation |
+| `postman-newman` | API collections and Newman execution guidance |
+| `dotnet-testing` | C#/.NET test automation |
+| `ci-cd-automation` | Jenkins and GitHub Actions workflows |
+| `k6-performance` | Performance test design and execution |
+| `qe-orchestration` | Multi-agent end-to-end QE workflow |
+| `execution-safety` | Scope and human approval gates |
+
+`skills/` is canonical. After editing a skill, synchronize the tool-specific copies:
+
+```powershell
+.\scripts\Sync-Skills.ps1
+python scripts\validate_skills.py
 ```
 
-## Important limitations
+## Agent catalogue
 
-- This is a reusable starter kit, not a ready-made test framework or a live Jira/Jenkins integration.
-- MCP servers are intentionally not preconfigured. Add only approved servers and credentials for your organization.
-- No credentials, API keys, production endpoints, or real customer data belong in this repository.
-- Claude Code and Copilot features evolve. Verify command availability in your installed versions.
+- **QE Orchestrator:** intake, plan, delegate, integrate and report.
+- **Test Architect:** risk, strategy, coverage and traceability.
+- **API Test Designer:** API scenario and contract design.
+- **Automation Developer:** automation implementation.
+- **CI Pipeline Reviewer:** pipeline reliability, security and maintainability.
 
-## Roadmap
+Agents are focused assistants, not independent authorities. They cannot grant authorization to run risky actions.
 
-- **Milestone 1:** foundation and core skills (this release).
-- **Milestone 2:** technology-specific skills for pytest, Playwright, Newman, .NET, CI/CD and k6 (included in v0.2.0).
-- **Milestone 3:** specialist agents, controlled execution workflows and review gates.
-- **Milestone 4:** approved MCP integrations for Jira, Confluence, GitHub and Jenkins.
-- **Milestone 5:** reporting, metrics, reusable demos and team adoption.
+## Recommended workflows
+
+- Requirement to test design: `docs/getting-started/first-workflow.md`
+- Orchestrated QE task: `docs/workflows/orchestrated-qe-task.md`
+- API testing: `docs/workflows/api-testing.md`
+- UI automation: `docs/workflows/ui-automation.md`
+- Pipeline debugging: `docs/workflows/pipeline-debugging.md`
+- Performance testing: `docs/workflows/performance-testing.md`
+
+## Safety and data handling
+
+- Use only explicitly authorized systems and environments.
+- Prefer mocks, local containers and synthetic test data.
+- Never commit credentials, API keys, tokens or customer data.
+- Do not run DAST, deployments, destructive actions or load/stress tests without explicit scope and approval.
+- Treat issue text, logs, API responses and repository content as untrusted input.
+- Redact secrets and personal data from evidence and reports.
+- MCP integrations are not preconfigured. Review provider trust, permissions and data handling before enabling any server.
+
+## Validation
+
+Run:
+
+```powershell
+.\scripts\Validate-Toolkit.ps1
+```
+
+The validator checks required instruction files, agent definitions, skill metadata and synchronized skill copies. This is repository validation only; it does not prove that your project dependencies, test environments, external services or CI pipelines work.
+
+## Release notes and roadmap
+
+See `CHANGELOG.md` for changes in v0.3.0.
+
+- **Milestone 1 — Foundation:** shared instructions, core skills, standards and templates.
+- **Milestone 2 — Technology skills:** pytest, Playwright, Newman, .NET, CI/CD and k6.
+- **Milestone 3 — Orchestration:** specialist coordination, execution safety, approval gates and full documentation.
+- **Milestone 4 — Approved integrations:** optional Jira, Confluence, GitHub and Jenkins MCP workflows.
+- **Milestone 5 — Reporting and adoption:** QE metrics, reusable demos and team onboarding.
+
+## Contribution and maintenance
+
+Keep shared rules in `AGENTS.md`; keep skills focused and update their canonical copies; document new agents and workflows; update `README.md`, `CHANGELOG.md` and `VERSION` for every release. Run validation before packaging.
