@@ -80,7 +80,7 @@ Do not modify files. Produce test cases and a traceability matrix.
 ## Roadmap
 
 - **Milestone 1:** foundation and core skills (this release).
-- **Milestone 2:** technology-specific skills for pytest, Playwright, Newman, .NET, CI/CD and k6.
+- **Milestone 2:** technology-specific skills for pytest, Playwright, Newman, .NET, CI/CD and k6 (included in v0.2.0).
 - **Milestone 3:** specialist agents, controlled execution workflows and review gates.
 - **Milestone 4:** approved MCP integrations for Jira, Confluence, GitHub and Jenkins.
 - **Milestone 5:** reporting, metrics, reusable demos and team adoption.

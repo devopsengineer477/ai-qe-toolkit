@@ -1,49 +1,19 @@
 from pathlib import Path
-import re
-import sys
-
-ROOT = Path(__file__).resolve().parents[1]
-REQUIRED = [
-    "AGENTS.md",
-    "CLAUDE.md",
-    ".github/copilot-instructions.md",
-    ".github/skills/qe-standards/SKILL.md",
-    ".github/skills/test-design/SKILL.md",
-    ".github/skills/api-testing/SKILL.md",
-    ".claude/skills/qe-standards/SKILL.md",
-    ".claude/skills/test-design/SKILL.md",
-    ".claude/skills/api-testing/SKILL.md",
-    ".github/agents/test-architect.agent.md",
-    ".github/agents/api-test-designer.agent.md",
-    ".claude/agents/test-architect.md",
-    ".claude/agents/api-test-designer.md",
-]
-
-def main() -> int:
-    missing = [item for item in REQUIRED if not (ROOT / item).is_file()]
+import re, sys
+ROOT=Path(__file__).resolve().parents[1]
+SKILLS=("qe-standards","test-design","api-testing","pytest-automation","playwright-automation","postman-newman","dotnet-testing","ci-cd-automation","k6-performance")
+REQUIRED=("AGENTS.md","CLAUDE.md",".github/copilot-instructions.md",".github/agents/test-architect.agent.md",".github/agents/api-test-designer.agent.md",".github/agents/automation-developer.agent.md",".github/agents/ci-pipeline-reviewer.agent.md",".claude/agents/test-architect.md",".claude/agents/api-test-designer.md",".claude/agents/automation-developer.md",".claude/agents/ci-pipeline-reviewer.md")
+def main():
+    missing=[p for p in REQUIRED if not (ROOT/p).is_file()]
+    for skill in SKILLS:
+        for loc in (".github/skills",".claude/skills"):
+            p=ROOT/loc/skill/"SKILL.md"
+            if not p.is_file(): missing.append(str(p.relative_to(ROOT)))
+            else:
+                txt=p.read_text(encoding="utf-8")
+                m=re.search(r"(?m)^name:\s*([a-z0-9-]+)\s*$",txt)
+                if not txt.startswith("---\n") or not m or m.group(1)!=skill: missing.append(f"Invalid skill metadata: {p.relative_to(ROOT)}")
     if missing:
-        print("Toolkit validation FAILED. Missing files:")
-        for item in missing:
-            print(f" - {item}")
-        return 1
-
-    # Lightweight frontmatter checks; this is not a full YAML parser.
-    skills = list((ROOT / ".github" / "skills").glob("*/SKILL.md"))
-    bad = []
-    for path in skills:
-        content = path.read_text(encoding="utf-8")
-        folder = path.parent.name
-        match = re.search(r"(?m)^name:\s*([a-z0-9-]+)\s*$", content)
-        if not content.startswith("---\n") or not match or match.group(1) != folder:
-            bad.append(str(path.relative_to(ROOT)))
-    if bad:
-        print("Invalid skill metadata:")
-        for item in bad:
-            print(f" - {item}")
-        return 1
-
-    print(f"Toolkit structure validation PASSED: {len(REQUIRED)} required files and {len(skills)} skill metadata entries checked.")
-    return 0
-
-if __name__ == "__main__":
-    sys.exit(main())
+        print("Toolkit validation FAILED:\n"+"\n".join(" - "+x for x in missing)); return 1
+    print(f"Toolkit validation PASSED: {len(REQUIRED)} required files and {len(SKILLS)*2} native skill files checked."); return 0
+if __name__ == "__main__": sys.exit(main())
