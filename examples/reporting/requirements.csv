@@ -1,0 +1,6 @@
+requirement_id,title,in_scope
+REQ-AUTH-001,Valid login returns access token,true
+REQ-AUTH-002,Invalid credentials are rejected,true
+REQ-AUTH-003,Expired tokens are rejected,true
+REQ-PROFILE-001,Profile retrieval returns user data,true
+REQ-PROFILE-002,Profile update validates email,true

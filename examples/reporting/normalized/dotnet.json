@@ -1,0 +1,60 @@
+{
+  "schema_version": "1.0",
+  "run_id": "sample-dotnet-001",
+  "source": "dotnet-trx",
+  "project": "QualityPilot-Demo",
+  "environment": "local",
+  "branch": "demo",
+  "commit_sha": "sample123",
+  "started_at": "2026-11-01T18:22:58.082664+00:00",
+  "duration_seconds": null,
+  "source_artifacts": [
+    "dotnet-sample.trx"
+  ],
+  "summary": {
+    "total": 3,
+    "passed": 1,
+    "failed": 1,
+    "skipped": 1,
+    "not_run": 0
+  },
+  "tests": [
+    {
+      "test_id": "trx-pass",
+      "name": "Sample.Passes",
+      "suite": null,
+      "status": "passed",
+      "duration_seconds": 1.5,
+      "message": null,
+      "requirement_ids": [],
+      "defect_ids": [],
+      "evidence": []
+    },
+    {
+      "test_id": "trx-fail",
+      "name": "Sample.Fails",
+      "suite": null,
+      "status": "failed",
+      "duration_seconds": 0.5,
+      "message": "Expected value mismatch",
+      "requirement_ids": [],
+      "defect_ids": [],
+      "evidence": []
+    },
+    {
+      "test_id": "trx-skip",
+      "name": "Sample.Skipped",
+      "suite": null,
+      "status": "skipped",
+      "duration_seconds": 0.0,
+      "message": null,
+      "requirement_ids": [],
+      "defect_ids": [],
+      "evidence": []
+    }
+  ],
+  "quality_signals": {},
+  "metadata": {
+    "normalizer_version": "0.5.0"
+  }
+}

@@ -1,0 +1,301 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-11-01T00:00:00+00:00",
+  "runs": [
+    {
+      "schema_version": "1.0",
+      "run_id": "sample-junit-001",
+      "source": "junit",
+      "project": "QualityPilot-Demo",
+      "environment": "local",
+      "branch": "demo",
+      "commit_sha": "sample123",
+      "started_at": "2026-11-01T18:22:58.081368+00:00",
+      "duration_seconds": 12.6,
+      "source_artifacts": [
+        "junit-sample.xml"
+      ],
+      "summary": {
+        "total": 6,
+        "passed": 4,
+        "failed": 1,
+        "skipped": 1,
+        "not_run": 0
+      },
+      "tests": [
+        {
+          "test_id": "api.authentication.valid_login_returns_token",
+          "name": "valid_login_returns_token",
+          "suite": "api.authentication",
+          "status": "passed",
+          "duration_seconds": 2.1,
+          "message": null,
+          "requirement_ids": [],
+          "defect_ids": [],
+          "evidence": []
+        },
+        {
+          "test_id": "api.authentication.invalid_password_returns_401",
+          "name": "invalid_password_returns_401",
+          "suite": "api.authentication",
+          "status": "failed",
+          "duration_seconds": 1.8,
+          "message": "Expected 401 but received 500 AssertionError: status mismatch",
+          "requirement_ids": [],
+          "defect_ids": [],
+          "evidence": []
+        },
+        {
+          "test_id": "api.authentication.expired_token_is_rejected",
+          "name": "expired_token_is_rejected",
+          "suite": "api.authentication",
+          "status": "passed",
+          "duration_seconds": 3.3,
+          "message": null,
+          "requirement_ids": [],
+          "defect_ids": [],
+          "evidence": []
+        },
+        {
+          "test_id": "api.profile.get_profile_returns_user",
+          "name": "get_profile_returns_user",
+          "suite": "api.profile",
+          "status": "passed",
+          "duration_seconds": 2.0,
+          "message": null,
+          "requirement_ids": [],
+          "defect_ids": [],
+          "evidence": []
+        },
+        {
+          "test_id": "api.profile.update_profile_validates_email",
+          "name": "update_profile_validates_email",
+          "suite": "api.profile",
+          "status": "passed",
+          "duration_seconds": 1.5,
+          "message": null,
+          "requirement_ids": [],
+          "defect_ids": [],
+          "evidence": []
+        },
+        {
+          "test_id": "api.profile.delete_profile_requires_admin",
+          "name": "delete_profile_requires_admin",
+          "suite": "api.profile",
+          "status": "skipped",
+          "duration_seconds": 0.0,
+          "message": "Not implemented in this environment",
+          "requirement_ids": [],
+          "defect_ids": [],
+          "evidence": []
+        }
+      ],
+      "quality_signals": {},
+      "metadata": {
+        "normalizer_version": "0.5.0"
+      }
+    },
+    {
+      "schema_version": "1.0",
+      "run_id": "sample-newman-001",
+      "source": "newman",
+      "project": "QualityPilot-Demo",
+      "environment": "local",
+      "branch": "demo",
+      "commit_sha": "sample123",
+      "started_at": "2026-11-01T02:26:40+00:00",
+      "duration_seconds": 6.5,
+      "source_artifacts": [
+        "newman-sample.json"
+      ],
+      "summary": {
+        "total": 3,
+        "passed": 2,
+        "failed": 1,
+        "skipped": 0,
+        "not_run": 0
+      },
+      "tests": [
+        {
+          "test_id": "GET./health.Health endpoint",
+          "name": "Health endpoint",
+          "suite": "Newman",
+          "status": "passed",
+          "duration_seconds": 0.09,
+          "message": null,
+          "requirement_ids": [],
+          "defect_ids": [],
+          "evidence": []
+        },
+        {
+          "test_id": "POST./login.Login invalid password",
+          "name": "Login invalid password",
+          "suite": "Newman",
+          "status": "failed",
+          "duration_seconds": 0.3,
+          "message": "status is 401: expected 401, got 500",
+          "requirement_ids": [],
+          "defect_ids": [],
+          "evidence": []
+        },
+        {
+          "test_id": "GET./profile.Profile endpoint",
+          "name": "Profile endpoint",
+          "suite": "Newman",
+          "status": "passed",
+          "duration_seconds": 0.11,
+          "message": null,
+          "requirement_ids": [],
+          "defect_ids": [],
+          "evidence": []
+        }
+      ],
+      "quality_signals": {},
+      "metadata": {
+        "normalizer_version": "0.5.0"
+      }
+    },
+    {
+      "schema_version": "1.0",
+      "run_id": "sample-k6-001",
+      "source": "k6-summary",
+      "project": "QualityPilot-Demo",
+      "environment": "local",
+      "branch": "demo",
+      "commit_sha": "sample123",
+      "started_at": "2026-11-01T18:22:58.082763+00:00",
+      "duration_seconds": null,
+      "source_artifacts": [
+        "k6-summary-sample.json"
+      ],
+      "summary": {
+        "total": 0,
+        "passed": 0,
+        "failed": 0,
+        "skipped": 0,
+        "not_run": 0
+      },
+      "tests": [],
+      "quality_signals": {
+        "http_req_duration_ms": {
+          "avg": 185.4,
+          "med": 150.0,
+          "p(90)": 310.0,
+          "p(95)": 420.0,
+          "max": 980.0
+        },
+        "http_req_failed_rate": 0.012,
+        "http_requests": 1200,
+        "http_requests_per_second": 40.0,
+        "vus_max": 25
+      },
+      "metadata": {
+        "normalizer_version": "0.5.0"
+      }
+    }
+  ],
+  "metrics": {
+    "execution": {
+      "total": 9,
+      "passed": 6,
+      "failed": 2,
+      "skipped": 1,
+      "not_run": 0,
+      "executed": 8,
+      "pass_rate_percent": 75.0
+    },
+    "requirements": {
+      "in_scope": 5,
+      "covered": 4,
+      "uncovered": 1,
+      "coverage_percent": 80.0
+    },
+    "failures": [
+      {
+        "test_id": "POST./login.Login invalid password",
+        "name": "Login invalid password",
+        "suite": "Newman",
+        "message": "status is 401: expected 401, got 500",
+        "source": "newman"
+      },
+      {
+        "test_id": "api.authentication.invalid_password_returns_401",
+        "name": "invalid_password_returns_401",
+        "suite": "api.authentication",
+        "message": "Expected 401 but received 500 AssertionError: status mismatch",
+        "source": null
+      }
+    ],
+    "by_source": {
+      "junit": {
+        "total": 6,
+        "passed": 4,
+        "failed": 1,
+        "skipped": 1,
+        "not_run": 0
+      },
+      "newman": {
+        "total": 3,
+        "passed": 2,
+        "failed": 1,
+        "skipped": 0,
+        "not_run": 0
+      },
+      "k6-summary": {
+        "total": 0,
+        "passed": 0,
+        "failed": 0,
+        "skipped": 0,
+        "not_run": 0
+      }
+    },
+    "performance": {
+      "sample-k6-001": {
+        "http_req_duration_ms": {
+          "avg": 185.4,
+          "med": 150.0,
+          "p(90)": 310.0,
+          "p(95)": 420.0,
+          "max": 980.0
+        },
+        "http_req_failed_rate": 0.012,
+        "http_requests": 1200,
+        "http_requests_per_second": 40.0,
+        "vus_max": 25
+      }
+    },
+    "data_quality": {
+      "runs": 3,
+      "tests_without_requirement_links": 5,
+      "requirements_without_linked_tests": 1
+    }
+  },
+  "release_gates": [
+    {
+      "name": "Minimum test pass rate",
+      "actual": 75.0,
+      "threshold": 98.0,
+      "status": "fail",
+      "note": "Uses passed / (passed + failed); skipped tests excluded."
+    },
+    {
+      "name": "Maximum failed tests",
+      "actual": 2,
+      "threshold": 0,
+      "status": "fail",
+      "note": "Failed test count across included runs."
+    },
+    {
+      "name": "Minimum requirement coverage",
+      "actual": 80.0,
+      "threshold": 95.0,
+      "status": "fail",
+      "note": "Coverage depends on supplied requirements.csv and traceability.csv."
+    }
+  ],
+  "limitations": [
+    "Demo data only; replace with actual execution artifacts.",
+    "Trend and flaky-test analysis require comparable historical runs.",
+    "Defect escape rate is unavailable without linked production defect data."
+  ]
+}

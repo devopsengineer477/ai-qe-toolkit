@@ -183,13 +183,13 @@ The validator checks required instruction files, agent definitions, skill metada
 
 ## Release notes and roadmap
 
-See `CHANGELOG.md` for changes in v0.3.0.
+See `CHANGELOG.md` for changes in v0.5.0.
 
 - **Milestone 1 — Foundation:** shared instructions, core skills, standards and templates.
 - **Milestone 2 — Technology skills:** pytest, Playwright, Newman, .NET, CI/CD and k6.
 - **Milestone 3 — Orchestration:** specialist coordination, execution safety, approval gates and full documentation.
 - **Milestone 4 — Approved integrations:** optional Jira, Confluence, GitHub and Jenkins MCP workflows.
-- **Milestone 5 — Reporting and adoption:** QE metrics, reusable demos and team onboarding.
+- **Milestone 5 — Reporting and quality intelligence:** normalized evidence, metrics, release gates and dashboards (included in v0.5.0).
 
 ## Contribution and maintenance
 
@@ -255,3 +255,56 @@ python scripts/validate_mcp.py
 ```
 
 This checks template JSON syntax, required read-only defaults, placeholder-only secrets and provider coverage. It does not connect to or authenticate with any external service.
+
+
+## Milestone 5 — QE reporting and quality intelligence
+
+The toolkit now includes a file-based reporting pipeline for JUnit XML, Newman JSON, .NET TRX and k6 summary JSON.
+
+### Reporting architecture
+
+```mermaid
+flowchart TD
+    A[JUnit / Newman / TRX / k6 artifacts] --> B[Format normalizers]
+    B --> C[Canonical execution-run JSON]
+    D[Requirements + traceability] --> E[Report aggregator]
+    C --> E
+    F[Release gate thresholds] --> E
+    E --> G[qe-report.json]
+    E --> H[Static HTML dashboard]
+```
+
+### Quick reporting workflow
+
+```powershell
+python scripts/normalize_results.py --format junit --input examples/reporting/junit-sample.xml --output reports/normalized/junit.json
+python scripts/normalize_results.py --format newman --input examples/reporting/newman-sample.json --output reports/normalized/newman.json
+python scripts/normalize_results.py --format k6-summary --input examples/reporting/k6-summary-sample.json --output reports/normalized/k6.json
+
+python scripts/build_qe_report.py `
+  --runs reports/normalized/junit.json reports/normalized/newman.json reports/normalized/k6.json `
+  --requirements examples/reporting/requirements.csv `
+  --traceability examples/reporting/traceability.csv `
+  --thresholds config/release-gates.example.json `
+  --out-dir reports/latest
+```
+
+Open `reports/latest/index.html` to view the dashboard. The JSON report is intended for future API ingestion.
+
+### Supported formats
+- JUnit XML: common pytest, Playwright and Jenkins JUnit artifacts.
+- Newman JSON: request and assertion outcomes.
+- .NET TRX: common test result records.
+- k6 summary JSON: latency/error/load metrics; performance signals are not counted as passed test cases.
+
+### Metrics and release gates
+- Pass rate uses passed / (passed + failed); skipped tests are excluded.
+- Requirement coverage uses the supplied in-scope requirements and traceability CSV files.
+- Missing metrics are shown as N/A, not zero.
+- Flaky rate and defect escape rate are not inferred without sufficient historical/defect data.
+- Release gates are configurable and should be agreed by the product team. A missing metric is not a pass.
+
+See `docs/reporting/` for the data contract, metric catalogue, adapters, dashboard, release-readiness model and CI integration pattern. A generated example report is included under `examples/reporting/demo-report/`.
+
+### Validate reporting
+Run `python -m unittest discover -s tests -p "test_*.py"` or run the full PowerShell validation script.

@@ -32,3 +32,5 @@ Claude Code project skills are stored in `.claude/skills/`.
 
 - MCP configuration templates are under `integrations/mcp/templates/`; never copy credentials into tracked files.
 - Before using MCP, inspect the provider's permissions and follow `integrations/mcp/README-SECURITY.md`.
+
+- Use the `qe-reporting` skill to normalize test evidence, calculate metrics and produce release-readiness reports.

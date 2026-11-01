@@ -30,3 +30,18 @@
 - Jenkins guidance requires a dedicated read-only service account.
 - Atlassian guidance recommends browse-only permissions for initial rollout.
 - No credentials, live server connections or external actions are included in the archive.
+
+## [0.5.0] - Milestone 5
+### Added
+- Canonical execution-run and QE report JSON schemas.
+- Normalizers for JUnit XML, .NET TRX, Newman JSON and k6 summary JSON.
+- Consolidated report generator producing JSON and a self-contained HTML dashboard.
+- Requirement-to-test coverage calculation and configurable release gates.
+- Reporting skill, sample artifacts, CI integration guidance and QualityPilot AI integration contract.
+- Automated reporting pipeline unit tests.
+
+### Safety and metric integrity
+- Raw source artifacts remain separate from normalized evidence.
+- k6 performance summaries are not counted as passed test cases.
+- Missing metrics remain unavailable rather than being represented as zero.
+- Flaky rate and defect escape rate are not inferred without sufficient source data.

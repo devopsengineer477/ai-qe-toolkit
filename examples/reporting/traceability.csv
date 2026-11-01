@@ -1,0 +1,5 @@
+requirement_id,test_id
+REQ-AUTH-001,api.authentication.valid_login_returns_token
+REQ-AUTH-002,api.authentication.invalid_password_returns_401
+REQ-AUTH-003,api.authentication.expired_token_is_rejected
+REQ-PROFILE-001,api.profile.get_profile_returns_user

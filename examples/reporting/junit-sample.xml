@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="6" failures="1" skipped="1" time="12.6">
+  <testsuite name="api.authentication" tests="3" failures="1" skipped="0" time="7.2">
+    <testcase classname="api.authentication" name="valid_login_returns_token" time="2.1"/>
+    <testcase classname="api.authentication" name="invalid_password_returns_401" time="1.8"><failure message="Expected 401 but received 500">AssertionError: status mismatch</failure></testcase>
+    <testcase classname="api.authentication" name="expired_token_is_rejected" time="3.3"/>
+  </testsuite>
+  <testsuite name="api.profile" tests="3" failures="0" skipped="1" time="5.4">
+    <testcase classname="api.profile" name="get_profile_returns_user" time="2.0"/>
+    <testcase classname="api.profile" name="update_profile_validates_email" time="1.5"/>
+    <testcase classname="api.profile" name="delete_profile_requires_admin" time="0.0"><skipped message="Not implemented in this environment"/></testcase>
+  </testsuite>
+</testsuites>

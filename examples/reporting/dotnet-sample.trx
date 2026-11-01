@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TestRun xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Results>
+    <UnitTestResult testName="Sample.Passes" testId="trx-pass" outcome="Passed" duration="00:00:01.5000000" />
+    <UnitTestResult testName="Sample.Fails" testId="trx-fail" outcome="Failed" duration="00:00:00.5000000">
+      <Output><ErrorInfo><Message>Expected value mismatch</Message></ErrorInfo></Output>
+    </UnitTestResult>
+    <UnitTestResult testName="Sample.Skipped" testId="trx-skip" outcome="NotExecuted" duration="00:00:00.0000000" />
+  </Results>
+</TestRun>

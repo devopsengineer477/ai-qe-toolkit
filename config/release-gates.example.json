@@ -1,0 +1,5 @@
+{
+  "min_pass_rate_percent": 98.0,
+  "max_failed_tests": 0,
+  "min_requirement_coverage_percent": 95.0
+}

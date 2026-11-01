@@ -13,3 +13,5 @@ Write-Host "Milestone 1 + 2 + 3 validation completed successfully." -ForegroundC
 python scripts/validate_docs.py
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 \npython scripts/validate_mcp.py\nif ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }\n
+python -m unittest discover -s tests -p "test_*.py"
+if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }

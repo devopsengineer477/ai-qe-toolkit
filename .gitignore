@@ -21,6 +21,7 @@ bin/
 obj/
 TestResults/
 *.trx
+!examples/reporting/*.trx
 
 # Node / Playwright
 node_modules/

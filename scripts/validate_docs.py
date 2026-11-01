@@ -27,12 +27,20 @@ def main():
         "docs/integrations/client-setup.md",
         "docs/integrations/qe-workflows.md",
         "docs/integrations/references.md",
+        "docs/reporting/data-contract.md",
+        "docs/reporting/metrics-catalog.md",
+        "docs/reporting/release-readiness.md",
+        "docs/reporting/adapters.md",
+        "docs/reporting/dashboard-guide.md",
+        "docs/reporting/qualitypilot-integration.md",
+        "docs/reporting/ci-integration-pattern.md",
+        "docs/reporting/README.md",
         "integrations/mcp/README.md",
         "integrations/mcp/README-SECURITY.md",
     ]
     missing = [p for p in required if not (ROOT / p).is_file()]
     readme = README.read_text(encoding="utf-8")
-    for heading in ["Proposed architecture", "Quick start", "How to use it", "Skills catalogue", "Agent catalogue", "Safety and data handling", "Milestone 4 — MCP integrations"]:
+    for heading in ["Proposed architecture", "Quick start", "How to use it", "Skills catalogue", "Agent catalogue", "Safety and data handling", "Milestone 4 — MCP integrations", "Milestone 5 — QE reporting"]:
         if heading not in readme:
             missing.append(f"README missing section: {heading}")
     if missing:

@@ -1,0 +1,60 @@
+{
+  "schema_version": "1.0",
+  "run_id": "sample-newman-001",
+  "source": "newman",
+  "project": "QualityPilot-Demo",
+  "environment": "local",
+  "branch": "demo",
+  "commit_sha": "sample123",
+  "started_at": "2026-11-01T02:26:40+00:00",
+  "duration_seconds": 6.5,
+  "source_artifacts": [
+    "newman-sample.json"
+  ],
+  "summary": {
+    "total": 3,
+    "passed": 2,
+    "failed": 1,
+    "skipped": 0,
+    "not_run": 0
+  },
+  "tests": [
+    {
+      "test_id": "GET./health.Health endpoint",
+      "name": "Health endpoint",
+      "suite": "Newman",
+      "status": "passed",
+      "duration_seconds": 0.09,
+      "message": null,
+      "requirement_ids": [],
+      "defect_ids": [],
+      "evidence": []
+    },
+    {
+      "test_id": "POST./login.Login invalid password",
+      "name": "Login invalid password",
+      "suite": "Newman",
+      "status": "failed",
+      "duration_seconds": 0.3,
+      "message": "status is 401: expected 401, got 500",
+      "requirement_ids": [],
+      "defect_ids": [],
+      "evidence": []
+    },
+    {
+      "test_id": "GET./profile.Profile endpoint",
+      "name": "Profile endpoint",
+      "suite": "Newman",
+      "status": "passed",
+      "duration_seconds": 0.11,
+      "message": null,
+      "requirement_ids": [],
+      "defect_ids": [],
+      "evidence": []
+    }
+  ],
+  "quality_signals": {},
+  "metadata": {
+    "normalizer_version": "0.5.0"
+  }
+}

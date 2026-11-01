@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "run_id": "sample-k6-001",
+  "source": "k6-summary",
+  "project": "QualityPilot-Demo",
+  "environment": "local",
+  "branch": "demo",
+  "commit_sha": "sample123",
+  "started_at": "2026-11-01T18:22:58.082763+00:00",
+  "duration_seconds": null,
+  "source_artifacts": [
+    "k6-summary-sample.json"
+  ],
+  "summary": {
+    "total": 0,
+    "passed": 0,
+    "failed": 0,
+    "skipped": 0,
+    "not_run": 0
+  },
+  "tests": [],
+  "quality_signals": {
+    "http_req_duration_ms": {
+      "avg": 185.4,
+      "med": 150.0,
+      "p(90)": 310.0,
+      "p(95)": 420.0,
+      "max": 980.0
+    },
+    "http_req_failed_rate": 0.012,
+    "http_requests": 1200,
+    "http_requests_per_second": 40.0,
+    "vus_max": 25
+  },
+  "metadata": {
+    "normalizer_version": "0.5.0"
+  }
+}

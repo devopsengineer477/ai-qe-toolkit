@@ -1,7 +1,7 @@
 from pathlib import Path
 import re, sys
 ROOT=Path(__file__).resolve().parents[1]
-SKILLS=("qe-standards","test-design","api-testing","pytest-automation","playwright-automation","postman-newman","dotnet-testing","ci-cd-automation","k6-performance","qe-orchestration","execution-safety")
+SKILLS=("qe-standards","test-design","api-testing","pytest-automation","playwright-automation","postman-newman","dotnet-testing","ci-cd-automation","k6-performance","qe-orchestration","execution-safety","qe-reporting")
 REQUIRED=("AGENTS.md","CLAUDE.md",".github/copilot-instructions.md",".github/agents/test-architect.agent.md",".github/agents/api-test-designer.agent.md",".github/agents/automation-developer.agent.md",".github/agents/ci-pipeline-reviewer.agent.md",".claude/agents/test-architect.md",".claude/agents/api-test-designer.md",".claude/agents/automation-developer.md",".claude/agents/ci-pipeline-reviewer.md",".claude/agents/qe-orchestrator.md",".github/agents/qe-orchestrator.agent.md")
 def main():
     missing=[p for p in REQUIRED if not (ROOT/p).is_file()]

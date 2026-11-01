@@ -1,0 +1,80 @@
+{
+  "run": {
+    "stats": {
+      "requests": {
+        "total": 3,
+        "failed": 1
+      },
+      "assertions": {
+        "total": 4,
+        "failed": 1
+      }
+    },
+    "timings": {
+      "started": 1793500000000,
+      "completed": 1793500006500,
+      "responseAverage": 120
+    }
+  },
+  "executions": [
+    {
+      "item": {
+        "name": "Health endpoint"
+      },
+      "request": {
+        "method": "GET",
+        "url": "https://test.example.invalid/health"
+      },
+      "response": {
+        "code": 200,
+        "responseTime": 90
+      },
+      "assertions": [
+        {
+          "assertion": "status is 200",
+          "error": null
+        }
+      ]
+    },
+    {
+      "item": {
+        "name": "Login invalid password"
+      },
+      "request": {
+        "method": "POST",
+        "url": "https://test.example.invalid/login"
+      },
+      "response": {
+        "code": 500,
+        "responseTime": 300
+      },
+      "assertions": [
+        {
+          "assertion": "status is 401",
+          "error": {
+            "message": "expected 401, got 500"
+          }
+        }
+      ]
+    },
+    {
+      "item": {
+        "name": "Profile endpoint"
+      },
+      "request": {
+        "method": "GET",
+        "url": "https://test.example.invalid/profile"
+      },
+      "response": {
+        "code": 200,
+        "responseTime": 110
+      },
+      "assertions": [
+        {
+          "assertion": "profile schema valid",
+          "error": null
+        }
+      ]
+    }
+  ]
+}

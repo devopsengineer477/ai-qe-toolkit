@@ -6,7 +6,7 @@ SKILLS = (
     "qe-standards", "test-design", "api-testing",
     "pytest-automation", "playwright-automation", "postman-newman",
     "dotnet-testing", "ci-cd-automation", "k6-performance",
-    "qe-orchestration", "execution-safety",
+    "qe-orchestration", "execution-safety", "qe-reporting",
 )
 
 def main():
